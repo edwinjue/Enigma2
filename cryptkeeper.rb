@@ -1,5 +1,3 @@
-# require_relative 'encryptor'
-# require_relative 'decryptor'
 require_relative 'constants'
 require 'pry'
 

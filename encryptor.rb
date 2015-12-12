@@ -23,4 +23,5 @@ class Encryptor
     end
 
   def secert_code
-    convert 
+
+end
