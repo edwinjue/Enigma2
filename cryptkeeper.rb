@@ -15,8 +15,7 @@ class CryptKeeper
 
   def create_new_key
 		@key = "%05d" % Random.new.rand(99999)
-
-	end
+  end
 
   def key_rotation(key) #creates 2 digit custom code for ABCD
     @a_key_rotation = @key[0..1].to_i
@@ -34,11 +33,11 @@ class CryptKeeper
     date_squared = date ** 2
     puts "date_squared = " + date_squared.to_s
     @key_gen = date_squared.to_s.split("")[-4..-1].join
-    puts "@key_gen = " + @key_gen.to_s
+    puts "@off_sets = " + @key_gen.to_s
   end
 
   def date_rotation #creates custom digit for ABCD
-    date_squared
+    date_generator
     @a_date_gen = @a_date_key[-4].to_i
     puts "@a_date_gen" + @a_date_gen.to_s
     @b_date_gen = @b_date_key[-3].to_i
@@ -49,8 +48,8 @@ class CryptKeeper
     puts "@d_date_gen" + @d_date_gen.to_s
   end
 
-
   def off_set_rotation #combines key and date to give rotation
+    date_rotation
     date_generator
     @a_rotation_code = @a_date_gen + @a_key_rotation
     puts "@a_rotation_code" + @a_date_gen.to_s + @a_key_rotation.to_s
