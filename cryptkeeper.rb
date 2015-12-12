@@ -29,31 +29,29 @@ class CryptKeeper
     puts "@d_key_rotation" + @d_key_rotation.to_s
   end
 
-
-    def date_squared
+  def date_generator
     date = @date_key.strftime("%d%m%y").to_i
-    date_generator = date ** 2
-    puts "date_generator = " + date_generator.to_s
-    @key_gen = date_generator.to_s.split("")[-4..-1].join
+    date_squared = date ** 2
+    puts "date_squared = " + date_squared.to_s
+    @key_gen = date_squared.to_s.split("")[-4..-1].join
     puts "@key_gen = " + @key_gen.to_s
   end
 
   def date_rotation #creates custom digit for ABCD
-    date_generator
-    @a_date_gen = @date_key[-4].to_i
+    date_squared
+    @a_date_gen = @a_date_key[-4].to_i
     puts "@a_date_gen" + @a_date_gen.to_s
-    @b_date_gen = @date_key[-3].to_i
+    @b_date_gen = @b_date_key[-3].to_i
     puts "@b_date_gen" + @b_date_gen.to_s
-    @c_date_gen = @date_key[-2].to_i
+    @c_date_gen = @c_date_key[-2].to_i
     puts "@c_date_gen" + @c_date_gen.to_s
-    @d_date_gen = @date_key[-1].to_i
+    @d_date_gen = @d_date_key[-1].to_i
     puts "@d_date_gen" + @d_date_gen.to_s
   end
 
 
-
   def off_set_rotation #combines key and date to give rotation
-    date_squared
+    date_generator
     @a_rotation_code = @a_date_gen + @a_key_rotation
     puts "@a_rotation_code" + @a_date_gen.to_s + @a_key_rotation.to_s
     @b_rotation_code = @b_date_gen + @b_key_rotation
