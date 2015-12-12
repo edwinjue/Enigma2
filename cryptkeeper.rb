@@ -32,19 +32,19 @@ class CryptKeeper
     date = @date_key.strftime("%d%m%y").to_i
     date_squared = date ** 2
     puts "date_squared = " + date_squared.to_s
-    @key_gen = date_squared.to_s.split("")[-4..-1].join
-    puts "@off_sets = " + @key_gen.to_s
+    @off_set = date_squared.to_s.split("")[-4..-1].join
+    puts "@off_sets = " + @off_set.to_s
   end
 
   def date_rotation #creates custom digit for ABCD
     date_generator
-    @a_date_gen = @a_date_key[-4].to_i
+    @a_date_gen = @off_sets[-4].to_i
     puts "@a_date_gen" + @a_date_gen.to_s
-    @b_date_gen = @b_date_key[-3].to_i
+    @b_date_gen = @off_sets[-3].to_i
     puts "@b_date_gen" + @b_date_gen.to_s
-    @c_date_gen = @c_date_key[-2].to_i
+    @c_date_gen = @off_sets[-2].to_i
     puts "@c_date_gen" + @c_date_gen.to_s
-    @d_date_gen = @d_date_key[-1].to_i
+    @d_date_gen = @off_sets[-1].to_i
     puts "@d_date_gen" + @d_date_gen.to_s
   end
 
