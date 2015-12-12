@@ -51,14 +51,14 @@ class CryptKeeper
   def off_set_rotation #combines key and date to give rotation
     date_rotation
     date_generator
-    @a_rotation_code = @a_date_gen + @a_key_rotation
-    puts "@a_rotation_code" + @a_date_gen.to_s + @a_key_rotation.to_s
-    @b_rotation_code = @b_date_gen + @b_key_rotation
-    puts "@b_rotation_code" + @b_date_gen.to_s + @b_key_rotation.to_s
-    @c_rotation_code = @c_date_gen + @c_key_rotation
-    puts "@c_rotation_code" + @c_date_gen.to_s + @c_key_rotation.to_s
-    @d_rotation_code = @d_date_gen + @d_key_rotation
-    puts "@d_rotation_code" + @d_date_gen.to_s + @d_key_rotation.to_s
+    @a_rotation_code = @a_date_gen.to_i + @a_key_rotation.to_i
+    puts "@a_rotation_code" + @a_date_gen.to_i + @a_key_rotation.to_i
+    @b_rotation_code = @b_date_gen.to_i + @b_key_rotation.to_i
+    puts "@b_rotation_code" + @b_date_gen.to_i + @b_key_rotation.to_i
+    @c_rotation_code = @c_date_gen.to_i + @c_key_rotation.to_i
+    puts "@c_rotation_code" + @c_date_gen.to_i + @c_key_rotation.to_i
+    @d_rotation_code = @d_date_gen.to_i + @d_key_rotation.to_i
+    puts "@d_rotation_code" + @d_date_gen.to_i + @d_key_rotation.to_i
   end
 
 end
