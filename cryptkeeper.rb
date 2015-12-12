@@ -6,9 +6,9 @@ require 'pry'
 
 class CryptKeeper
 
-  attr_reader :date_key , :key
+  attr_reader :date_key, :key
 
-  def initialize(date_key,key)
+  def initialize(date_key,key_gen)
     @date_key = Time.now.strftime("%d%m%y").to_i
     @key = key_gen
   end
@@ -78,9 +78,8 @@ class CryptKeeper
 
 end
 
-ck = CryptKeeper.new('121215', '23451')
+ck = CryptKeeper.new('121215','23451')
 ck.key_rotation('23451')
-ck.off_set
-ck.rotation
+ck.off_set_rotation
 
 #need to figure out why rotation isn't working
