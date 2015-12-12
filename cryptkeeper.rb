@@ -52,13 +52,13 @@ class CryptKeeper
     date_rotation
     date_generator
     @a_rotation_code = @a_date_gen.to_i + @a_key_rotation.to_i
-    puts "@a_rotation_code" + @a_date_gen.to_i + @a_key_rotation.to_i
+    puts "@a_rotation_code" + @a_rotation_code.to_s
     @b_rotation_code = @b_date_gen.to_i + @b_key_rotation.to_i
-    puts "@b_rotation_code" + @b_date_gen.to_i + @b_key_rotation.to_i
+    puts "@b_rotation_code" + @b_rotation_code.to_s
     @c_rotation_code = @c_date_gen.to_i + @c_key_rotation.to_i
-    puts "@c_rotation_code" + @c_date_gen.to_i + @c_key_rotation.to_i
+    puts "@c_rotation_code" + @c_rotation_code.to_s
     @d_rotation_code = @d_date_gen.to_i + @d_key_rotation.to_i
-    puts "@d_rotation_code" + @d_date_gen.to_i + @d_key_rotation.to_i
+    puts "@d_rotation_code" + @d_rotation_code.to_s
   end
 
 end
