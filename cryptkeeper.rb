@@ -9,7 +9,7 @@ class CryptKeeper
   attr_reader :date_key, :key
 
   def initialize(date_key,key_gen)
-    @date_key = Time.now.strftime("%d%m%y").to_i
+    @date_key = Time.now
     @key = key_gen
   end
 
@@ -31,8 +31,7 @@ class CryptKeeper
 
 
     def date_squared
-    @date_key = Time.now
-    @date_key.strftime("%d%m%y").to_i
+    date = @date_key.strftime("%d%m%y").to_i
     date_generator = date ** 2
     puts "date_generator = " + date_generator.to_s
     @key_gen = date_generator.to_s.split("")[-4..-1].join
