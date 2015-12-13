@@ -13,9 +13,19 @@ class Enigma
     end
 
     def encrypt(message, key =nil, date = nil)
-      encryptor = Encryptor.new(message, key, date)
-      encryptor.encrypt
+      if key.nil?
+        encrypt_key = create_new_key
+      else
+        encrypt_key = key
+      end
+      if date.nil?
+        date_key = @date_key.strftime("%d%m%y")
+      else
+        date_key = date
     end
+        encryptor = Encryptor.new(message,encrypt_key,date_key)
+        encryptor.encrypt
+      end
 
     def decrypt(secert_message, key, date)
       decryptor = deycryptor.new(secert_message, key, date)
@@ -59,7 +69,6 @@ class Enigma
       puts "@c_date_gen" + @c_date_gen.to_s
       @d_date_gen = @off_sets[-1].to_i
       puts "@d_date_gen" + @d_date_gen.to_s
-
       return [a,b,c,d]
     end
 
@@ -77,7 +86,3 @@ class Enigma
     end
 
 end
-
-ck = Enigma.new("some message")
-ck.key_rotation('23451')
-ck.off_set_rotation
