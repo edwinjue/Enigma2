@@ -15,13 +15,17 @@ class Encryptor
   end
 
   def incomming_message(incoming)
+    #goal is to have the incoming message to
+    #convert into the number of the Constant
     imput = "#{incoming}".split(//)
   end
 
   def convert
-    incoming to numbers in Constants
+    #GOAL - is to have the incomming_message + the ABCD to return new coded value
+    #forward rotation
     end
 
   def secert_code
+
 
 end

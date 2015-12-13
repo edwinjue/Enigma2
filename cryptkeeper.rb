@@ -1,6 +1,6 @@
 require_relative 'constants'
 require 'pry'
-
+require 'date'
 
 class CryptKeeper
 
@@ -15,7 +15,8 @@ class CryptKeeper
 		@key = "%05d" % Random.new.rand(99999)
   end
 
-  def key_rotation(key) #creates 2 digit custom code for ABCD
+  def key_rotation(key = nil) #creates 2 digit custom code for ABCD
+    if key = nil
     @a_key_rotation = @key[0..1].to_i
     puts "@a_key_rotation" + @a_key_rotation.to_s
     @b_key_rotation = @key[1..2].to_i
@@ -24,6 +25,8 @@ class CryptKeeper
     puts "@c_key_rotation" + @c_key_rotation.to_s
     @d_key_rotation = @key[3..4].to_i
     puts "@d_key_rotation" + @d_key_rotation.to_s
+  else
+    "%05d"
   end
 
   def date_generator
@@ -44,6 +47,8 @@ class CryptKeeper
     puts "@c_date_gen" + @c_date_gen.to_s
     @d_date_gen = @off_sets[-1].to_i
     puts "@d_date_gen" + @d_date_gen.to_s
+
+    return [a,b,c,d]
   end
 
   def off_set_rotation #combines key and date to give rotation
