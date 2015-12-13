@@ -24,7 +24,7 @@ class Enigma
         date_key = date
       end
       encryptor = Encryptor.new(message,encrypt_key,date_key)
-      encryptor.encrypt
+      # encryptor.encrypt
     end
 
     def decrypt(secert_message, key, date)
