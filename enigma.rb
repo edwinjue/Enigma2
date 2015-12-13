@@ -1,5 +1,5 @@
 require_relative 'constants'
-require_relative ' encryptor'
+require_relative 'encryptor'
 require 'pry'
 require 'date'
 
@@ -22,10 +22,10 @@ class Enigma
         date_key = Time.now.strftime("%d%m%y")
       else
         date_key = date
-    end
-        encryptor = Encryptor.new(message,encrypt_key,date_key)
-        encryptor.encrypt
       end
+      encryptor = Encryptor.new(message,encrypt_key,date_key)
+      encryptor.encrypt
+    end
 
     def decrypt(secert_message, key, date)
       decryptor = Deycryptor.new(secert_message, key, date)
@@ -37,3 +37,8 @@ class Enigma
     end
 
 end
+
+e = Enigma.new
+my_message = "This is so secret!! ..end.."
+output = e.encrypt(my_message)
+puts "output = " + output.to_s

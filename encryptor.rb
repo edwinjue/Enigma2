@@ -1,13 +1,12 @@
-require_relative 'enigma'
-require_relative ' constants'
+
+require_relative 'constants'
 require 'pry'
 
 class Encryptor
 
   def initialize(message, key, date)
-    @date_key
-    @key
-
+    # @date_key
+    # @key
   end
 
   def encrypt
