@@ -1,68 +1,71 @@
+require_relative 'constants'
 require 'pry'
-binding.pry
+require 'date'
 
-class CryptKeeper
+class Enigma
 
-  def initialize
-    @char_set = 'abcdefghijklmnopqrstuvwxyz0123456789., !@#$%^&*()<>;:/?\|'.split(//)
-    @date = Time.now
+  attr_reader :date_key, :key
+
+  def initialize(date_key,key_gen)
+    @date_key = Time.now
+    @key = key_gen
   end
 
-  def encrypt
-
-
+  def create_new_key
+		@key = "%05d" % Random.new.rand(99999)
   end
 
+  def key_rotation(key = nil) #creates 2 digit custom code for ABCD
+    if key = nil
+    @a_key_rotation = @key[0..1].to_i
+    puts "@a_key_rotation" + @a_key_rotation.to_s
+    @b_key_rotation = @key[1..2].to_i
+    puts "@b_key_rotation" + @b_key_rotation.to_s
+    @c_key_rotation = @key[2..3].to_i
+    puts "@c_key_rotation" + @c_key_rotation.to_s
+    @d_key_rotation = @key[3..4].to_i
+    puts "@d_key_rotation" + @d_key_rotation.to_s
+  else
+    "%05d"
+  end
+
+  def date_generator
+    date = @date_key.strftime("%d%m%y").to_i
+    date_squared = date ** 2
+    puts "date_squared = " + date_squared.to_s
+    @off_sets = date_squared.to_s.split("")[-4..-1].join
+    puts "@off_sets = " + @off_sets.to_s
+  end
+
+  def date_rotation #creates custom digit for ABCD
+    date_generator
+    @a_date_gen = @off_sets[-4].to_i
+    puts "@a_date_gen" + @a_date_gen.to_s
+    @b_date_gen = @off_sets[-3].to_i
+    puts "@b_date_gen" + @b_date_gen.to_s
+    @c_date_gen = @off_sets[-2].to_i
+    puts "@c_date_gen" + @c_date_gen.to_s
+    @d_date_gen = @off_sets[-1].to_i
+    puts "@d_date_gen" + @d_date_gen.to_s
+
+    return [a,b,c,d]
+  end
+
+  def off_set_rotation #combines key and date to give rotation
+    date_rotation
+    date_generator
+    @a_rotation_code = @a_date_gen.to_i + @a_key_rotation.to_i
+    puts "@a_rotation_code" + @a_rotation_code.to_s
+    @b_rotation_code = @b_date_gen.to_i + @b_key_rotation.to_i
+    puts "@b_rotation_code" + @b_rotation_code.to_s
+    @c_rotation_code = @c_date_gen.to_i + @c_key_rotation.to_i
+    puts "@c_rotation_code" + @c_rotation_code.to_s
+    @d_rotation_code = @d_date_gen.to_i + @d_key_rotation.to_i
+    puts "@d_rotation_code" + @d_rotation_code.to_s
+  end
 
 end
 
-
-class Encryptor
-
-  def initialize
-      @date = Time.now
-      @key = key
-  end
-
-  def my_time(now) #generates numbers code by date
-    @date = Time.now
-    @date.strftime("%d%m%y").to_i
-    my_time = date * 2
-    @date_key = my_time.to_s.split("")[-4..-1].join
-  end
-
-  def hang_man #generates number code based on location of character
-    charSet[(charSet.index('w')+69)%(charSet.length)]
-  end
-
-  def key_rotation #generates random 5 key code
-        # @random_num = "%05d" % rand(99999)
-    @a_key_rotation = @ key[0..1].to_i
-    @b_key_rotation = @ key[1..2].to_i
-    @c_key_rotation = @ key[2..3].to_i
-    @d_key_rotation = @ key[3..4].to_i
-
-  end
-end
-
-m= MythodMan.new(Random.rand(0..99999).to_s)
-m.key_rotation
-
-best day ever = Time.now.strftime("%d%m%y").to_i
-puts my_time
-
-
-
-class Dycryptor
-
-def initialize(encrypted_message, date, key)
-  @decrypt = Encryptor.new(encrypted_message, date, key)
-end
-
-def negative_rotation
-end
-
-def decrypt
-end
-
-end
+ck = Enigma.new('121215','23451')
+ck.key_rotation('23451')
+ck.off_set_rotation

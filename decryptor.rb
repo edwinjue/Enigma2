@@ -1,3 +1,5 @@
+require_relative 'enigma'
+
 class Dycryptor
 
 def initialize(encrypted_message, date, key)

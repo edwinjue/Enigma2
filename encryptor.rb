@@ -1,4 +1,4 @@
-require_relative 'cryptkeeper'
+require_relative 'enigma'
 require_relative ' constants'
 require 'pry'
 
