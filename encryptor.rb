@@ -4,9 +4,13 @@ require 'pry'
 
 class Encryptor
 
-  def initialize
+  def initialize(message, key, date)
     @date_key
     @key
+
+  end
+
+  def encryptinite
 
   end
 
