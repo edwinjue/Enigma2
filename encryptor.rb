@@ -6,26 +6,21 @@ class Encryptor
 
   def initialize(message, key, date)
     # @date_key
-    # @key
+    @key = key
   end
 
   def encrypt
 
   end
 
-  def key_rotation(key = nil) #creates 2 digit custom code for ABCD
-    if key == nil
+  def key_rotation #creates 2 digit custom code for ABCD
       @a_key_rotation = @key[0..1].to_i
-      puts "@a_key_rotation" + @a_key_rotation.to_s
       @b_key_rotation = @key[1..2].to_i
-      puts "@b_key_rotation" + @b_key_rotation.to_s
       @c_key_rotation = @key[2..3].to_i
-      puts "@c_key_rotation" + @c_key_rotation.to_s
       @d_key_rotation = @key[3..4].to_i
-      puts "@d_key_rotation" + @d_key_rotation.to_s
-    else
-      "%05d"
-    end
+
+      puts [@a_key_rotation, @b_key_rotation,
+            @c_key_rotation, @d_key_rotation].inspect
   end
 
   def date_generator
