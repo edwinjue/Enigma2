@@ -13,7 +13,7 @@ class Encryptor
   def encryptinite
 
   end
-
+=begin
   def hang_man #generates number code based on location of character
     charSet[(charSet.index('w')+69)%(charSet.length)]
   end
@@ -30,6 +30,6 @@ class Encryptor
     end
 
   def secert_code
-
+=end
 
 end
