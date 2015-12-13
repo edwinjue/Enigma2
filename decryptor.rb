@@ -1,4 +1,5 @@
 require_relative 'enigma'
+require_relative ' encryptor'
 
 class Dycryptor
 
