@@ -4,12 +4,32 @@ require 'pry'
 
 class Encryptor
 
+  attr_accessor :message, :key, :date
+
   def initialize(message, key, date)
     # @date_key
+    @message = message
     @key = key
+    @date = date_generator
+    @char_set = Constants::CHARSET.split(//)
+    @num_digits = Constants::CHARSET.split(//).length.to_s.length
+    #to determine the number of digits we are working with for each character
+  	#for example: when length of charset reaches 100, we need to make sure '5'
+    # gets padded like '005'
+    @rotation_array = key_rotation(@key)
+    @offset_array = date_rotation(@date)
   end
 
   def encrypt
+    enryptext = ""
+    @message.split(//).map_with_index do |char, num|
+      current_position = char_set.index(char)
+      current_offset = offset_array[num % @offset_array.length]
+      current_rotation = rotation_array[num % rotation_array.length]
+      segment = (current_position.to_i + current_offset.to_i + current_rotation.to_i) % char_set.index
+    end
+    encryptext << "%0#{@num_digits}d" % segment.to_s
+  end
 
   end
 
@@ -19,12 +39,14 @@ class Encryptor
       @c_key_rotation = @key[2..3].to_i
       @d_key_rotation = @key[3..4].to_i
 
-      puts [@a_key_rotation, @b_key_rotation,
-            @c_key_rotation, @d_key_rotation].inspect
+      return [@a_key_rotation,
+              @b_key_rotation,
+              @c_key_rotation,
+              @d_key_rotation]
   end
 
   def date_generator
-    date = @date_key.strftime("%d%m%y").to_i
+    @date = @date_key.strftime("%d%m%y").to_i
     date_squared = date ** 2
     puts "date_squared = " + date_squared.to_s
     @off_sets = date_squared.to_s.split("")[-4..-1].join
@@ -34,14 +56,11 @@ class Encryptor
   def date_rotation #creates custom digit for ABCD
     date_generator
     @a_date_gen = @off_sets[-4].to_i
-    puts "@a_date_gen" + @a_date_gen.to_s
     @b_date_gen = @off_sets[-3].to_i
-    puts "@b_date_gen" + @b_date_gen.to_s
     @c_date_gen = @off_sets[-2].to_i
-    puts "@c_date_gen" + @c_date_gen.to_s
     @d_date_gen = @off_sets[-1].to_i
-    puts "@d_date_gen" + @d_date_gen.to_s
-    return [a,b,c,d]
+
+    return [@a_date_gen, @b_date_gen, @c_date_gen, @d_date_gen]
   end
 
   def off_set_rotation #combines key and date to give rotation
@@ -55,6 +74,9 @@ class Encryptor
     puts "@c_rotation_code" + @c_rotation_code.to_s
     @d_rotation_code = @d_date_gen.to_i + @d_key_rotation.to_i
     puts "@d_rotation_code" + @d_rotation_code.to_s
+
+    return [@a_rotation_code, @b_rotation_code,
+            @c_rotation_code, @d_rotation_code]
   end
 
 
