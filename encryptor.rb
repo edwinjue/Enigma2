@@ -21,7 +21,7 @@ class Encryptor
   end
 
   def encrypt
-    enryptext = ""
+    encryptext = ""
     @message.split(//).map_with_index do |char, num|
       current_position = char_set.index(char)
       current_offset = offset_array[num % @offset_array.length]
