@@ -13,8 +13,13 @@ class Enigma
     end
 
     def encrypt(message, key =nil, date = nil)
-      encryptor = Encryptor.new(message,key,date)
+      encryptor = Encryptor.new(message, key, date)
       encryptor.encrypt
+    end
+
+    def decrypt(secert_message, key, date)
+      decryptor = deycryptor.new(secert_message, key, date)
+      decryptor.decrypt
     end
 
     def create_new_key
