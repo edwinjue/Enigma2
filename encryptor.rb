@@ -25,7 +25,7 @@ class Encryptor
     @message.split(//).map_with_index do |char, num|
       current_position = char_set.index(char)
       current_offset = offset_array[num % @offset_array.length]
-      current_rotation = rotation_array[num % rotation_array.length]
+      current_rotation = rotation_array[num % @rotation_array.length]
       segment = (current_position.to_i + current_offset.to_i + current_rotation.to_i) % char_set.index
     end
     encryptext << "%0#{@num_digits}d" % segment.to_s
