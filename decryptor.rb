@@ -6,6 +6,8 @@ class Decryptor
 
   def initialize(encrypted_message, date, key)
     @encrypted_message = message
+    @key = key
+    @date = date
     @char_set = Constants::CHARSET.split(//)
     @rotation_array = key_rotation(@key)
     puts "@rotation_array = " + @rotation_array.inspect
