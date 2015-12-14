@@ -7,6 +7,15 @@ class Decryptor
   def initialize(encrypted_message, date, key)
     @encrypted_message = message
     @char_set = Constants::CHARSET.split(//)
+    @rotation_array = key_rotation(@key)
+    puts "@rotation_array = " + @rotation_array.inspect
+    @offset_array = process_date(@date)
+    puts "@offset_array = " + @offset_array.inspect
+    @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
+      arr.map!{ |x| x.to_i }
+      arr.reduce(:+) }
+    puts "@total_offset = " + @total_offset.inspect
+  end
   end
 
   def decrypt
@@ -15,7 +24,7 @@ class Decryptor
 
     end
   end
-  
+
   def key_rotation(key) #creates 2 digit custom code for ABCD
       @a_key_rotation = key[0..1]
       @b_key_rotation = key[1..2]
