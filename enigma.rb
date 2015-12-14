@@ -1,5 +1,6 @@
 require_relative 'constants'
 require_relative 'encryptor'
+require_relative 'decryptor'
 require 'pry'
 require 'date'
 

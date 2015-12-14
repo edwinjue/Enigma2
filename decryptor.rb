@@ -9,6 +9,10 @@ class Decryptor
     @key = key
     @date = date
     @char_set = Constants::CHARSET.split(//)
+    @num_digits = Constants::CHARSET.split(//).length.to_s.length
+    #to determine the number of digits we are working with for each character
+    #for example: when length of charset reaches 100, we need to make sure '5'
+    # gets padded like '005'
     @rotation_array = key_rotation(@key)
     puts "@rotation_array = " + @rotation_array.inspect
     @offset_array = process_date(@date)
