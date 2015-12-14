@@ -7,7 +7,7 @@ class Decryptor
   attr_reader :encrypted_message, :key, :date
 
   def initialize(encrypted_message, date, key)
-    @encrypted_message = message
+    @encrypted_message = message 
     @key = key
     @date = date
     @char_set = Constants::CHARSET.split(//)

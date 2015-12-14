@@ -40,7 +40,7 @@ class Enigma
 end
 
 e = Enigma.new
-my_message = "jace4life"
+my_message = "can't figure this out"
 output = e.encrypt(my_message,'34682','121215')
 puts "output = " + output.to_s
 plaintext = e.decrypt(encrypted_message, '34682', '121215')
