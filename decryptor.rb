@@ -1,8 +1,9 @@
+
 require_relative 'enigma'
-require_relative 'encryptor'
 require_relative 'constants'
 
 class Decryptor
+
 
   def initialize(encrypted_message, date, key)
     @encrypted_message = message
@@ -27,8 +28,14 @@ class Decryptor
   def decrypt
     plaintext = ""
     @encrypted_message.split(//).each_with_index do |char, num|
+      current_position = @char_set.index(char)
+      current_offset = total_offset
 
+      segment = (current_position.to_i - current_offset.to_i) % @char_set.length
+
+      plaintext << @char_set[segment]
     end
+    plaintext
   end
 
   def key_rotation(key) #creates 2 digit custom code for ABCD

@@ -28,8 +28,8 @@ class Enigma
       encryptor.encrypt
     end
 
-    def decrypt(secret_message, key, date)
-      decryptor = Decryptor.new(secret_message, key, date)
+    def decrypt(encrypted_message, key, date)
+      decryptor = Decryptor.new(encrypted_message, key, date)
       decryptor.decrypt
     end
 
