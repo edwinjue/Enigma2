@@ -22,8 +22,7 @@ class Encryptor
     puts "@offset_array = " + @offset_array.inspect
     @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
       arr.map!{ |x| x.to_i }
-      arr.reduce(:+)
-    }
+      arr.reduce(:+) }
     puts "@total_offset = " + @total_offset.inspect
   end
 
@@ -35,7 +34,8 @@ class Encryptor
       #current_rotation = @rotation_array[num % 4] #@rotation_array.length]
       #segment = (current_position.to_i + current_offset.to_i + current_rotation.to_i) % char_set.index
       segment = (current_position.to_i + current_offset.to_i) % @char_set.length
-      encryptext << "%0#{@num_digits}d" % segment.to_s
+      #encryptext << "%0#{@num_digits}d" % segment.to_s - puts out to number
+      encryptext << @char_set[segment]
     end
     encryptext
   end

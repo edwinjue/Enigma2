@@ -27,8 +27,8 @@ class Enigma
       encryptor.encrypt
     end
 
-    def decrypt(secert_message, key, date)
-      decryptor = Deycryptor.new(secert_message, key, date)
+    def decrypt(secret_message, key, date)
+      decryptor = Deycryptor.new(secret_message, key, date)
       decryptor.decrypt
     end
 
@@ -39,6 +39,8 @@ class Enigma
 end
 
 e = Enigma.new
-my_message = "Ziba is a good dog ..end.."
-output = e.encrypt(my_message)
+my_message = "jace4life"
+output = e.encrypt(my_message,'34682','121215')
 puts "output = " + output.to_s
+plaintext = e.decrypt(output, '34682', '121215')
+puts "plaintext = " + plaintext.to_s
