@@ -28,7 +28,7 @@ class Enigma
     end
 
     def decrypt(secret_message, key, date)
-      decryptor = Deycryptor.new(secret_message, key, date)
+      decryptor = Decryptor.new(secret_message, key, date)
       decryptor.decrypt
     end
 
