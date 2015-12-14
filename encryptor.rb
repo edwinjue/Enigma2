@@ -22,7 +22,8 @@ class Encryptor
     puts "@offset_array = " + @offset_array.inspect
     @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
       arr.map!{ |x| x.to_i }
-      arr.reduce(:+)}
+      arr.reduce(:+)
+    }
     puts "@total_offset = " + @total_offset.inspect
   end
 
@@ -30,13 +31,13 @@ class Encryptor
     encryptext = ""
     @message.split(//).each_with_index do |char, num|
       current_position = @char_set.index(char)
-      current_offset = @offset_array[num % 4] #@offset_array.length]
-      current_rotation = @rotation_array[num % 4] #@rotation_array.length]
-      segment = (current_position.to_i + current_offset.to_i + current_rotation.to_i) % char_set.index
+      current_offset = @total_offset[num % 4] #@offset_array.length]
+      #current_rotation = @rotation_array[num % 4] #@rotation_array.length]
+      #segment = (current_position.to_i + current_offset.to_i + current_rotation.to_i) % char_set.index
+      segment = (current_position.to_i + current_offset.to_i) % @char_set.length
+      encryptext << "%0#{@num_digits}d" % segment.to_s
     end
-    encryptext << "%0#{@num_digits}d" % segment.to_s
-  end
-
+    encryptext
   end
 
   def key_rotation(key) #creates 2 digit custom code for ABCD
@@ -59,3 +60,5 @@ class Encryptor
     d_date_gen = off_sets[-1].to_i
     [a_date_gen, b_date_gen, c_date_gen, d_date_gen]
   end
+
+end
