@@ -18,6 +18,8 @@ class Encryptor
     # gets padded like '005'
     @rotation_array = key_rotation(@key)
     @offset_array = process_date(@date)
+    @total_offset = [@offset_array + @rotation_array].transpose.map{|arr|
+                    arr.inject{|sum, element| sum+element}}
   end
 
   def encrypt
@@ -34,10 +36,10 @@ class Encryptor
   end
 
   def key_rotation(key) #creates 2 digit custom code for ABCD
-      @a_key_rotation = key[0..1].to_i
-      @b_key_rotation = key[1..2].to_i
-      @c_key_rotation = key[2..3].to_i
-      @d_key_rotation = key[3..4].to_i
+      @a_key_rotation = key[0..1]
+      @b_key_rotation = key[1..2]
+      @c_key_rotation = key[2..3]
+      @d_key_rotation = key[3..4]
 
       puts   [@a_key_rotation,
               @b_key_rotation,
@@ -54,7 +56,6 @@ class Encryptor
     b_date_gen = off_sets[-3].to_i
     c_date_gen = off_sets[-2].to_i
     d_date_gen = off_sets[-1].to_i
-
     puts [a_date_gen, b_date_gen, c_date_gen, d_date_gen]
   end
 
@@ -69,9 +70,8 @@ class Encryptor
   # end
 
   def off_set_rotation #combines key and date to give rotation
-    date_rotation
-    date_generator
-    @a_rotation_code = @a_date_gen.to_i + @a_key_rotation.to_i
+
+    @a_rotation_code = @b_offset_array.to_i + @a_key_rotation.to_i
     puts "@a_rotation_code" + @a_rotation_code.to_s
     @b_rotation_code = @b_date_gen.to_i + @b_key_rotation.to_i
     puts "@b_rotation_code" + @b_rotation_code.to_s
@@ -80,8 +80,8 @@ class Encryptor
     @d_rotation_code = @d_date_gen.to_i + @d_key_rotation.to_i
     puts "@d_rotation_code" + @d_rotation_code.to_s
 
-    puts [@a_rotation_code, @b_rotation_code,
-            @c_rotation_code, @d_rotation_code]
+    # puts [@a_rotation_code, @b_rotation_code,
+    #         @c_rotation_code, @d_rotation_code]
   end
 
 
