@@ -1,9 +1,10 @@
 
-require_relative 'enigma'
 require_relative 'constants'
+require 'pry'
 
 class Decryptor
 
+  attr_reader :encrypted_message, :key, :date
 
   def initialize(encrypted_message, date, key)
     @encrypted_message = message
@@ -22,7 +23,6 @@ class Decryptor
       arr.map!{ |x| x.to_i }
       arr.reduce(:+) }
     puts "@total_offset = " + @total_offset.inspect
-  end
   end
 
   def decrypt
@@ -58,3 +58,4 @@ class Decryptor
     d_date_gen = off_sets[-1].to_i
     [a_date_gen, b_date_gen, c_date_gen, d_date_gen]
   end
+end

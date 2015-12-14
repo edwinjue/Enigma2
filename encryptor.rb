@@ -7,7 +7,6 @@ class Encryptor
   attr_accessor :message, :key, :date
 
   def initialize(message, key, date)
-    # @date_key
     @message = message
     @key = key
     @date = date
