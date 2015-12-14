@@ -17,9 +17,13 @@ class Encryptor
   	#for example: when length of charset reaches 100, we need to make sure '5'
     # gets padded like '005'
     @rotation_array = key_rotation(@key)
+    puts "@rotation_array = " + @rotation_array.inspect
     @offset_array = process_date(@date)
-    @total_offset = [@offset_array + @rotation_array].transpose.map{|arr|
-                    arr.inject{|sum, element| sum+element}}
+    puts "@offset_array = " + @offset_array.inspect
+    @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
+      arr.map!{ |x| x.to_i }
+      arr.reduce(:+)}
+    puts "@total_offset = " + @total_offset.inspect
   end
 
   def encrypt
@@ -41,45 +45,17 @@ class Encryptor
       @c_key_rotation = key[2..3]
       @d_key_rotation = key[3..4]
 
-      return [@a_key_rotation,
-              @b_key_rotation,
-              @c_key_rotation,
-              @d_key_rotation]
+      [@a_key_rotation, @b_key_rotation, @c_key_rotation, @d_key_rotation]
   end
 
   def process_date(date)
     date_squared = date.to_i ** 2
-    puts "date_squared = " + date_squared.to_s
+    #puts "date_squared = " + date_squared.to_s
     off_sets = date_squared.to_s.split("")[-4..-1].join
-    puts "off_sets = " + off_sets.to_s
+    #puts "off_sets = " + off_sets.to_s
     a_date_gen = off_sets[-4].to_i
     b_date_gen = off_sets[-3].to_i
     c_date_gen = off_sets[-2].to_i
     d_date_gen = off_sets[-1].to_i
-    return [a_date_gen, b_date_gen, c_date_gen, d_date_gen]
-  end
-
-  # def date_rotation #creates custom digit for ABCD
-  #   process_date
-  #   @a_date_gen = @off_sets[-4].to_i
-  #   @b_date_gen = @off_sets[-3].to_i
-  #   @c_date_gen = @off_sets[-2].to_i
-  #   @d_date_gen = @off_sets[-1].to_i
-  #
-  #   return [@a_date_gen, @b_date_gen, @c_date_gen, @d_date_gen]
-  # end
-
-  def off_set_rotation #combines key and date to give rotation
-
-    @a_rotation_code = @b_offset_array.to_i + @a_key_rotation.to_i
-    puts "@a_rotation_code" + @a_rotation_code.to_s
-    @b_rotation_code = @b_date_gen.to_i + @b_key_rotation.to_i
-    puts "@b_rotation_code" + @b_rotation_code.to_s
-    @c_rotation_code = @c_date_gen.to_i + @c_key_rotation.to_i
-    puts "@c_rotation_code" + @c_rotation_code.to_s
-    @d_rotation_code = @d_date_gen.to_i + @d_key_rotation.to_i
-    puts "@d_rotation_code" + @d_rotation_code.to_s
-
-    # puts [@a_rotation_code, @b_rotation_code,
-    #         @c_rotation_code, @d_rotation_code]
+    [a_date_gen, b_date_gen, c_date_gen, d_date_gen]
   end
