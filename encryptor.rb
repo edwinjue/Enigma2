@@ -41,7 +41,7 @@ class Encryptor
       @c_key_rotation = key[2..3]
       @d_key_rotation = key[3..4]
 
-      puts   [@a_key_rotation,
+      return [@a_key_rotation,
               @b_key_rotation,
               @c_key_rotation,
               @d_key_rotation]
@@ -56,11 +56,11 @@ class Encryptor
     b_date_gen = off_sets[-3].to_i
     c_date_gen = off_sets[-2].to_i
     d_date_gen = off_sets[-1].to_i
-    puts [a_date_gen, b_date_gen, c_date_gen, d_date_gen]
+    return [a_date_gen, b_date_gen, c_date_gen, d_date_gen]
   end
 
   # def date_rotation #creates custom digit for ABCD
-  #   date_generator
+  #   process_date
   #   @a_date_gen = @off_sets[-4].to_i
   #   @b_date_gen = @off_sets[-3].to_i
   #   @c_date_gen = @off_sets[-2].to_i
@@ -83,24 +83,3 @@ class Encryptor
     # puts [@a_rotation_code, @b_rotation_code,
     #         @c_rotation_code, @d_rotation_code]
   end
-
-
-
-=begin
-  def hang_man #generates number code based on location of character
-    charSet[(charSet.index('w')+69)%(charSet.length)]
-  end
-
-  def incomming_message(incoming)
-    #goal is to have the incoming message to
-    #convert into the number of the Constant
-    imput = "#{incoming}".split(//)
-  end
-
-  def convert
-    #GOAL - is to have the incomming_message + the ABCD to return new coded value
-    #forward rotation
-    end
-
-  def secert_code
-=end
