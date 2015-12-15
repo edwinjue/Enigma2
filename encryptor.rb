@@ -1,4 +1,3 @@
-
 require_relative 'constants'
 require 'pry'
 
@@ -7,7 +6,9 @@ class Encryptor
   attr_accessor :message, :key, :date
 
   def initialize(message, key, date)
+    # @date_key
     @message = message
+    #puts "Inside Encryptor::initialize, message = " + message
     @key = key
     @date = date
     @char_set = Constants::CHARSET.split(//)
@@ -21,7 +22,8 @@ class Encryptor
     puts "@offset_array = " + @offset_array.inspect
     @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
       arr.map!{ |x| x.to_i }
-      arr.reduce(:+) }
+      arr.reduce(:+)
+    }
     puts "@total_offset = " + @total_offset.inspect
   end
 
@@ -36,16 +38,18 @@ class Encryptor
       #encryptext << "%0#{@num_digits}d" % segment.to_s - puts out to number
       encryptext << @char_set[segment]
     end
-    encryptext
+    puts "Inside Encryptor::encrypt, encryptext = " + encryptext
+
+    return encryptext
   end
 
   def key_rotation(key) #creates 2 digit custom code for ABCD
-      @a_key_rotation = key[0..1]
-      @b_key_rotation = key[1..2]
-      @c_key_rotation = key[2..3]
-      @d_key_rotation = key[3..4]
+      a_key_rotation = key[0..1]
+      b_key_rotation = key[1..2]
+      c_key_rotation = key[2..3]
+      d_key_rotation = key[3..4]
 
-      [@a_key_rotation, @b_key_rotation, @c_key_rotation, @d_key_rotation]
+      [a_key_rotation, b_key_rotation, c_key_rotation, d_key_rotation]
   end
 
   def process_date(date)

@@ -1,13 +1,13 @@
-
 require_relative 'constants'
 require 'pry'
 
 class Decryptor
 
-  attr_reader :encrypted_message, :key, :date
-
-  def initialize(encrypted_message, date, key)
-    @encrypted_message = message 
+  def initialize(message, key, date)
+    if message.nil?
+      raise ArgumentError, "Invalid message, message was nil"
+    end
+    @encrypted_message = message
     @key = key
     @date = date
     @char_set = Constants::CHARSET.split(//)
@@ -21,15 +21,17 @@ class Decryptor
     puts "@offset_array = " + @offset_array.inspect
     @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
       arr.map!{ |x| x.to_i }
-      arr.reduce(:+) }
+      arr.reduce(:+)}
+
     puts "@total_offset = " + @total_offset.inspect
   end
 
   def decrypt
+    puts "inside decrypt"
     plaintext = ""
     @encrypted_message.split(//).each_with_index do |char, num|
       current_position = @char_set.index(char)
-      current_offset = total_offset
+      current_offset = @total_offset[num % 4]
 
       segment = (current_position.to_i - current_offset.to_i) % @char_set.length
 
@@ -39,12 +41,12 @@ class Decryptor
   end
 
   def key_rotation(key) #creates 2 digit custom code for ABCD
-      @a_key_rotation = key[0..1]
-      @b_key_rotation = key[1..2]
-      @c_key_rotation = key[2..3]
-      @d_key_rotation = key[3..4]
+      a_key_rotation = key[0..1]
+      b_key_rotation = key[1..2]
+      c_key_rotation = key[2..3]
+      d_key_rotation = key[3..4]
 
-      [@a_key_rotation, @b_key_rotation, @c_key_rotation, @d_key_rotation]
+      [a_key_rotation, b_key_rotation, c_key_rotation, d_key_rotation]
   end
 
   def process_date(date)
