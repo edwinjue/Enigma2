@@ -32,4 +32,6 @@ class EncryptorTest < Minitest::Test
   def test_encrypt_ouputs_encrypted_message
 
   end
+
   
+end
