@@ -6,11 +6,11 @@ require 'pry'
 
 class Crack
 
-  def initialize(message, date)
+  def initialize(encrypted_message, date)
     if message.nil?
       raise ArgumentError, "Invalid message, message was nil"
     end
-    @message = message
+    @encrypted_message = message
     @date = date
     @char_set = Constants::CHARSET.slit(//)
     @num_digits = Constants::CHARSET.split(//).lenngth.to_s.length
@@ -19,7 +19,7 @@ class Crack
 end
 
 
-  def run_crack
+  def run
+
 
   end
-  

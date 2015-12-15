@@ -33,6 +33,12 @@ class Enigma
       decryptor.decrypt
     end
 
+    def crack(encrypted_message)
+      crackler = Cracker.new(encrypted_message)
+      crackler.crack
+    end
+
+
     def create_new_key
        "%05d" % Random.new.rand(99999)
     end
@@ -40,9 +46,7 @@ class Enigma
 end
 
 e = Enigma.new
-my_message = "jace4life"
-output = e.encrypt(my_message,'34682','121215')
-puts "output = " + output.to_s
-
-plaintext = e.decrypt(output, '34682', '121215')
-puts "plaintext = " + plaintext.to_s
+my_message = "jace4life ..end.."
+encrypted_message = e.encrypt(my_message)
+crack_plaintext = e.crack(encrypted_message)
+puts "crack_plaintext = " + crack_plaintext.to_s

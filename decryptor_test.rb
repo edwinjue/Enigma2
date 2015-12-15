@@ -8,7 +8,8 @@ require_relative 'decryptor'
 class DecryptorTest < Minitest::Test
 
   def test_key_generates_5_digit_number
-
+    "%05d" % Random.new.rand(99999)
+    assert_equal 5, decrypter.@key 
   end
 
   def test_key_generates_radom_5_digit_number
@@ -23,8 +24,9 @@ class DecryptorTest < Minitest::Test
 
   end
 
-  def test_date_is_sqaured
-
+  def test_process_date_is_sqaured
+    date = Time.now.strftime("%d%m%y") ** 2
+    assert
   end
 
   def test_decrypt_converts_encrypted_message
