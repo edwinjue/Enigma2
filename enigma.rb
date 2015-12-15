@@ -44,7 +44,6 @@ class Enigma
       crackle.crackle
     end
 
-
     def create_new_key
        "%05d" % Random.new.rand(99999)
     end
@@ -53,9 +52,27 @@ end
 
 e = Enigma.new
 my_message = "jace4life ..end.."
-# output = e.encrypt(message)
-# puts output
+=begin
+key = "12345"
+puts "key = " + key
 
-encrypted_message = e.encrypt(my_message)
+puts "Calling encrypt w/ key"
+encrypted_message = e.encrypt(my_message,key)
+puts "encrypted_message = " + encrypted_message.to_s
+
+puts "Calling decrypt"
+decrypt_plaintext = e.decrypt(encrypted_message,key, Time.now)
+puts "decrypt_plaintext = " + decrypt_plaintext.to_s
+
+puts "Calling crack"
 crack_plaintext = e.crack(encrypted_message)
 puts "crack_plaintext = " + crack_plaintext.to_s
+=end
+puts "-" * 10
+puts "Calling encrypt (no key)"
+encrypted_message = e.encrypt(my_message)
+puts "encrypted_message = " + encrypted_message.to_s
+puts "-" * 10
+puts "Calling crack"
+crack_plaintext = e.crack(encrypted_message)
+#puts "crack_plaintext = " + crack_plaintext.to_s

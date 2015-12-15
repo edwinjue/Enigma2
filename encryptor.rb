@@ -38,7 +38,7 @@ class Encryptor
       #encryptext << "%0#{@num_digits}d" % segment.to_s - puts out to number
       encryptext << @char_set[segment]
     end
-    puts "Inside Encryptor::encrypt, encryptext = " + encryptext
+    #puts "Inside Encryptor::encrypt, encryptext = " + encryptext
 
     return encryptext
   end
@@ -53,10 +53,12 @@ class Encryptor
   end
 
   def process_date(date)
+
     date_squared = date.to_i ** 2
     #puts "date_squared = " + date_squared.to_s
     off_sets = date_squared.to_s.split("")[-4..-1].join
-    #puts "off_sets = " + off_sets.to_s
+
+    puts "Encryptor: off_sets = " + off_sets.to_s
     a_date_gen = off_sets[-4].to_i
     b_date_gen = off_sets[-3].to_i
     c_date_gen = off_sets[-2].to_i
