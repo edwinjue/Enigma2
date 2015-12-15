@@ -29,12 +29,17 @@ class Enigma
     end
 
     def decrypt(encrypted_message, key, date)
-      decryptor = Decryptor.new(encrypted_message, key, date)
+      decryptor = Decryptor.new(encrypted_message,key,date)
       decryptor.decrypt
     end
 
-    def crack(encrypted_message)
-      crackler = Cracker.new(encrypted_message)
+    def crack(encrypted_message, date = nil)
+      if date.nil?
+        date_key = Time.now.strftime("%d%m%y")
+      else
+        date_key = date
+      end
+      crackler = Cracker.new(encrypted_message,date_key)
       crackler.crack
     end
 
