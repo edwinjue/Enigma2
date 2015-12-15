@@ -34,7 +34,6 @@ class Decryptor
       current_offset = @total_offset[num % 4]
 
       segment = (current_position.to_i - current_offset.to_i) % @char_set.length
-
       plaintext << @char_set[segment]
     end
     plaintext

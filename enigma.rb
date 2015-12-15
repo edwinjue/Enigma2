@@ -52,6 +52,9 @@ end
 
 e = Enigma.new
 my_message = "jace4life ..end.."
+output = e.encrypt(message)
+puts output
+
 encrypted_message = e.encrypt(my_message)
 crack_plaintext = e.crack(encrypted_message)
 puts "crack_plaintext = " + crack_plaintext.to_s
