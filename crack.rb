@@ -49,7 +49,7 @@ class Crack
    rotation_array[second_to_last_dot_rotation_index] =  encrypted_second_to_last_character - dot_position - second_to_last_dot_offset
    rotation_array[d_rotation_index] = encrypted_third_to_last_character - d_position - d_rotation_offset
    rotation_array[n_rotation_index] = encrypted_fourth_to_last_character - n_position - n_rotation_offset
-
+   puts "rotation_array = " + rotation_array.inspect
    #% @char_set.lengthend
  end
   def process_date(date)

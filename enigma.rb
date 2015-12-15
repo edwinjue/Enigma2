@@ -1,6 +1,7 @@
 require_relative 'constants'
 require_relative 'encryptor'
 require_relative 'decryptor'
+require_relative 'crack'
 require 'pry'
 require 'date'
 
@@ -39,8 +40,8 @@ class Enigma
       else
         date_key = date
       end
-      crackler = Cracker.new(encrypted_message,date_key)
-      crackler.crack
+      crackle = Crack.new(encrypted_message,date_key)
+      crackle.crackle
     end
 
 
