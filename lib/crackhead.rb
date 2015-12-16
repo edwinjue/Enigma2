@@ -17,59 +17,65 @@ class Crack
     puts "@offset_array = " + @offset_array.inspect
   end
 
-  def crackle
-   rotation_array = []
-   #rotation_array = (current_position - original_position - current_date_offset)
-   def rotation_index
-   #indicies for respective positions in date offset and rotation array
-   last_dot_rotation_index = (@message.length-1) % 4
-   #puts "last_dot_rotation_index = " + last_dot_rotation_index.to_s
-   second_to_last_dot_rotation_index = (@message.length-2) % 4
-   #puts "second_to_last_dot_rotation_index = " + second_to_last_dot_rotation_index.to_s
-   d_rotation_index = (@message.length-3) % 4
-   #puts "d_rotation_index = " + d_rotation_index.to_s
-   n_rotation_index = (@message.length-4) % 4
-   #puts "n_rotation_index = " + n_rotation_index.to_s
-   end
-   def off_sets
-   #date offset values using indicies above
-   last_dot_offset = @offset_array[last_dot_rotation_index]
-   second_to_last_dot_offset = @offset_array[second_to_last_dot_rotation_index]
-   d_rotation_offset = @offset_array[d_rotation_index]
-   n_rotation_offset = @offset_array[n_rotation_index]
-   end
+  # def crackle
+  #  rotation_array = []
+  #  #rotation_array = (current_position - original_position - current_date_offset)
 
-   #positions in the charset of original unencrypted characters
+  #  def method_1#indicies for respective positions in date offset and rotation array
+  #  last_dot_rotation_index = (@message.length-1) % 4
+  #  #puts "last_dot_rotation_index = " + last_dot_rotation_index.to_s
+  #  second_to_last_dot_rotation_index = (@message.length-2) % 4
+  #  #puts "second_to_last_dot_rotation_index = " + second_to_last_dot_rotation_index.to_s
+  #  d_rotation_index = (@message.length-3) % 4
+  #  #puts "d_rotation_index = " + d_rotation_index.to_s
+  #  n_rotation_index = (@message.length-4) % 4
+  #   end #puts "n_rotation_index = " + n_rotation_index.to_s
+
+   def method_2 #date offset values using indicies above
+   last_dot_offset = @offset_array(@message.length-1) %4 #[last_dot_rotation_index]
+   second_to_last_dot_offset = @offset_array(@message.length-2) %4 #[second_to_last_dot_rotation_index]
+   d_rotation_offset = @offset_array(@message.length-3) %4 #[d_rotation_index]
+   n_rotation_offset = @offset_array(@message.length-4) %4 #[n_rotation_index]
+  end
+
+   def method_3#positions in the charset of original unencrypted characters
    dot_position = @char_set.index('.')
    d_position = @char_set.index('d')
    n_position = @char_set.index('n')
+   end
 
+   def method_4
    encrypted_last_character = @char_set.index(@message[-1])
    encrypted_second_to_last_character = @char_set.index(@message[-2])
    encrypted_third_to_last_character = @char_set.index(@message[-3])
    encrypted_fourth_to_last_character = @char_set.index(@message[-4])
+   end
 
-   rotation_array[last_dot_rotation_index] = (encrypted_last_character - dot_position -last_dot_offset) % @char_set.length
-   rotation_array[second_to_last_dot_rotation_index] =  (encrypted_second_to_last_character - dot_position - second_to_last_dot_offset) % @char_set.length
-   rotation_array[d_rotation_index] = (encrypted_third_to_last_character - d_position - d_rotation_offset) % @char_set.length
-   rotation_array[n_rotation_index] = (encrypted_fourth_to_last_character - n_position - n_rotation_offset) % @char_set.length
-   puts "rotation_array = " + rotation_array.inspect
-
-  def inspect_rotation
-  increment = @char_set.length
-  a_rot = generate_increments(rotation_array[0], increment).map { |val| "%02d" % val.to_s }
-  puts "a_rot = " + a_rot.inspect
-  b_rot = generate_increments(rotation_array[1], increment).map { |val| "%02d" % val.to_s }
-  puts "b_rot = " + b_rot.inspect
-  c_rot = generate_increments(rotation_array[2], increment).map { |val| "%02d" % val.to_s }
-  puts "c_rot = " + c_rot.inspect
-  d_rot = generate_increments(rotation_array[3], increment).map { |val| "%02d" % val.to_s }
-  puts "d_rot = " + d_rot.inspect
+   def crackle
+    rotation_array = []
+    (method_4 - method_3 - method_2) % @char_set.length
   end
+
+  #  rotation_array = (encrypted_last_character - dot_position -last_dot_offset) % @char_set.length
+  #  rotation_array =  (encrypted_second_to_last_character - dot_position - second_to_last_dot_offset) % @char_set.length
+  #  rotation_array = (encrypted_third_to_last_character - d_position - d_rotation_offset) % @char_set.length
+  #  rotation_array = (encrypted_fourth_to_last_character - n_position - n_rotation_offset) % @char_set.length
+  #  puts "rotation_array = " + rotation_array.inspect
+def inspect_rotation
+  increment = @char_set.length
+  generate_increments(crackle, increment).map { |val| "%02d" % val.to_s }
+  # a_rot = generate_increments(rotation_array[0], increment).map { |val| "%02d" % val.to_s }
+  # puts "a_rot = " + a_rot.inspect
+  # b_rot = generate_increments(rotation_array[1], increment).map { |val| "%02d" % val.to_s }
+  # puts "b_rot = " + b_rot.inspect
+  # c_rot = generate_increments(rotation_array[2], increment).map { |val| "%02d" % val.to_s }
+  # puts "c_rot = " + c_rot.inspect
+  # d_rot = generate_increments(rotation_array[3], increment).map { |val| "%02d" % val.to_s }
+  # puts "d_rot = " + d_rot.inspect
+end
   crack(rotation_array)
 
    #% @char_set.lengthend
- end
   def process_date(date)
     date_squared = date.to_i ** 2
     #puts "date_squared = " + date_squared.to_s

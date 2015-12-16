@@ -26,7 +26,7 @@ def encrypt_file(file_name,data)
 	File.write(file_name, encryptext)
 	puts "Created #{file_name} with the key #{encryptor.key} and date #{encryptor.date}"
 end
-
+__FILE__
 message_file = ARGV[0]
 data = read_file(message_file)
 

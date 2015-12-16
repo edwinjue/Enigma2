@@ -39,7 +39,7 @@ key = "12345"
 puts "key = " + key
 
 puts "Calling encrypt w/ key"
-encrypted_message = e.encrypt(my_message,key)
+encrypted_message = e.encrypt(my_message)
 puts "encrypted_message = " + encrypted_message.to_s
 
 puts "Calling decrypt"
