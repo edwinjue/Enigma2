@@ -34,4 +34,12 @@ class EnigmaTest < Minitest::Test
     assert_equal message, plaintext
   end
 
+  def test_it_cracks_a_message_successfully
+    message = "Your my Favorite Instructor ..end.."
+    date    = "151215"
+    enc     = Encryptor.new(message, "12345", date)
+    crack   = Crack.new(enc.encrypt, date)
+    assert_equal message, crack.crackle
+  end
+
 end
