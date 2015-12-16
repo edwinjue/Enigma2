@@ -18,18 +18,13 @@ class Decryptor
     #for example: when length of charset reaches 100, we need to make sure '5'
     # gets padded like '005'
     @rotation_array = key_rotation(@key)
-    puts "@rotation_array = " + @rotation_array.inspect
     @offset_array = process_date(@date)
-    puts "@offset_array = " + @offset_array.inspect
     @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
       arr.map!{ |x| x.to_i }
       arr.reduce(:+)}
-
-    puts "@total_offset = " + @total_offset.inspect
   end
 
   def decrypt
-    puts "inside decrypt"
     plaintext = ""
     @encrypted_message.split(//).each_with_index do |char, num|
       current_position = @char_set.index(char)
@@ -54,7 +49,6 @@ class Decryptor
     date_squared = date.to_i ** 2
     #puts "date_squared = " + date_squared.to_s
     off_sets = date_squared.to_s.split("")[-4..-1].join
-    #puts "off_sets = " + off_sets.to_s
     a_date_gen = off_sets[-4].to_i
     b_date_gen = off_sets[-3].to_i
     c_date_gen = off_sets[-2].to_i

@@ -15,19 +15,16 @@ class Enigma
     end
 
     def encrypt(message, key =nil, date = nil)
-      #encryptor = Encryptor.new(message,encrypt_key,date_key)
       encryptor = Encryptor.new(message,key,date)
       encryptor.encrypt
     end
 
     def decrypt(encrypted_message, key, date)
-      #decryptor = Decryptor.new(encrypted_message,key,date)
       decryptor = Decryptor.new(encrypted_message,key,date)
       decryptor.decrypt
     end
 
     def crack(encrypted_message, date = nil)
-      #crackle = Crack.new(encrypted_message,date_key)
       crackle = Crack.new(encrypted_message,date)
 
       crackle.crackle

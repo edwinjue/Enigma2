@@ -10,7 +10,6 @@ class Encryptor
   def initialize(message, key=nil, date=nil)
 
     @message = message
-    #puts "Inside Encryptor::initialize, message = " + message
     @key = Keygen.new(key).key
     @date = Dategen.new(date).key
 
@@ -20,14 +19,10 @@ class Encryptor
   	#for example: when length of charset reaches 100, we need to make sure '5'
     # gets padded like '005'
     @rotation_array = key_rotation(@key)
-    puts "@rotation_array = " + @rotation_array.inspect
     @offset_array = process_date(@date)
-    puts "@offset_array = " + @offset_array.inspect
     @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
       arr.map!{ |x| x.to_i }
-      arr.reduce(:+)
-    }
-    puts "@total_offset = " + @total_offset.inspect
+      arr.reduce(:+)    }
   end
 
   def encrypt
@@ -35,13 +30,10 @@ class Encryptor
     @message.split(//).each_with_index do |char, num|
       current_position = @char_set.index(char)
       current_offset = @total_offset[num % 4] #@offset_array.length]
-      #current_rotation = @rotation_array[num % 4] #@rotation_array.length]
-      #segment = (current_position.to_i + current_offset.to_i + current_rotation.to_i) % char_set.index
       segment = (current_position.to_i + current_offset.to_i) % @char_set.length
       #encryptext << "%0#{@num_digits}d" % segment.to_s - puts out to number
       encryptext << @char_set[segment]
     end
-    #puts "Inside Encryptor::encrypt, encryptext = " + encryptext
 
     return encryptext
   end
@@ -60,8 +52,6 @@ class Encryptor
     date_squared = date.to_i ** 2
     #puts "date_squared = " + date_squared.to_s
     off_sets = date_squared.to_s.split("")[-4..-1].join
-
-    puts "Encryptor: off_sets = " + off_sets.to_s
     a_date_gen = off_sets[-4].to_i
     b_date_gen = off_sets[-3].to_i
     c_date_gen = off_sets[-2].to_i

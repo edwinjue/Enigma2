@@ -9,7 +9,6 @@ class Crack
       raise ArgumentError, "Invalid message, message was nil"
     end
     @message = message
-
     @date =  Dategen.new(date).key
     @char_set = Constants::CHARSET.split(//)
     @num_digits = Constants::CHARSET.split(//).length.to_s.length
