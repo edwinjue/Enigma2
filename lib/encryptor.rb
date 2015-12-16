@@ -1,16 +1,19 @@
+require_relative 'keygen'
+require_relative 'dategen'
 require_relative 'constants'
 require 'pry'
 
 class Encryptor
 
-  attr_accessor :message, :key, :date
+  attr_accessor :message, :key, :date, :total_offset
 
-  def initialize(message, key, date)
-    # @date_key
+  def initialize(message, key=nil, date=nil)
+
     @message = message
     #puts "Inside Encryptor::initialize, message = " + message
-    @key = key
-    @date = date
+    @key = Keygen.new(key).key
+    @date = Dategen.new(date).key
+
     @char_set = Constants::CHARSET.split(//)
     @num_digits = Constants::CHARSET.split(//).length.to_s.length
     #to determine the number of digits we are working with for each character

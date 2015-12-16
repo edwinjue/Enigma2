@@ -1,3 +1,5 @@
+require 'date'
+
 class Dategen
 	attr_reader :key
 	def initialize(input)

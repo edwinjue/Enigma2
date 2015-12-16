@@ -1,3 +1,5 @@
+require_relative 'keygen'
+require_relative 'dategen'
 require_relative 'constants'
 require 'pry'
 
@@ -8,8 +10,8 @@ class Decryptor
       raise ArgumentError, "Invalid message, message was nil"
     end
     @encrypted_message = message
-    @key = key
-    @date = date
+    @key = Keygen.new(key).key
+    @date = Dategen.new(date).key
     @char_set = Constants::CHARSET.split(//)
     @num_digits = Constants::CHARSET.split(//).length.to_s.length
     #to determine the number of digits we are working with for each character

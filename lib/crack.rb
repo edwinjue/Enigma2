@@ -1,4 +1,4 @@
-
+require_relative 'dategen'
 require 'pry'
 
 
@@ -9,7 +9,8 @@ class Crack
       raise ArgumentError, "Invalid message, message was nil"
     end
     @message = message
-    @date = date
+
+    @date =  Dategen.new(date).key
     @char_set = Constants::CHARSET.split(//)
     @num_digits = Constants::CHARSET.split(//).length.to_s.length
     @offset_array = process_date(@date)

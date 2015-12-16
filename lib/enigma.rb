@@ -1,5 +1,3 @@
-require_relative 'keygen'
-require_relative 'dategen'
 require_relative 'constants'
 require_relative 'encryptor'
 require_relative 'decryptor'
@@ -17,27 +15,20 @@ class Enigma
     end
 
     def encrypt(message, key =nil, date = nil)
-      kg = Keygen.new(key)  #kg.key will contain the secret key
-      dg = Dategen.new(date)  #dg.key will contain the date key
       #encryptor = Encryptor.new(message,encrypt_key,date_key)
-      encryptor = Encryptor.new(message,kg.key,dg.key)
+      encryptor = Encryptor.new(message,key,date)
       encryptor.encrypt
     end
 
     def decrypt(encrypted_message, key, date)
-      kg = Keygen.new(key)
-      dg = Dategen.new(date)
       #decryptor = Decryptor.new(encrypted_message,key,date)
-      decryptor = Decryptor.new(encrypted_message,kg.key,dg.key)
+      decryptor = Decryptor.new(encrypted_message,key,date)
       decryptor.decrypt
     end
 
     def crack(encrypted_message, date = nil)
-
-      dg = Dategen.new(date)  #dg.key will contain the date key
-
       #crackle = Crack.new(encrypted_message,date_key)
-      crackle = Crack.new(encrypted_message,dg.key)
+      crackle = Crack.new(encrypted_message,date)
 
       crackle.crackle
     end

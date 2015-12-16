@@ -1,40 +1,40 @@
+require 'simplecov'
+SimpleCov.start
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
 
-require_relative 'decryptor'
+require '../lib/decryptor'
+require '../lib/encryptor'
 
 class DecryptorTest < Minitest::Test
 
-  def test_key_generates_5_digit_number
-    "%05d" % Random.new.rand(99999)
-    assert_equal 5, decrypter.@key 
+  def test_decryptor_will_not_reveal_message_with_invalid_key
+    message = "Your my Favorite Instructor ..end.."
+    enc = Encryptor.new(message, "12345", "171215")
+    encrypted_message = enc.encrypt
+    dec = Decryptor.new(encrypted_message, "54321", "171215")
+    plaintext = dec.decrypt
+    refute_equal message, plaintext
   end
 
-  def test_key_generates_radom_5_digit_number
-
+  def test_decryptor_will_not_reveal_message_with_invalid_date
+    message = "Your my Favorite Instructor ..end.."
+    enc = Encryptor.new(message, "12345", "151215")
+    encrypted_message = enc.encrypt
+    dec = Decryptor.new(encrypted_message, "12345", "171115")
+    plaintext = dec.decrypt
+    refute_equal message, plaintext
   end
 
-  def test_total_off_set_has_combine_date_and_key_codes
-
+  def test_decryptor_will_not_reveal_message_with_invalid_key_and_invalid_date
+    message = "Your my Favorite Instructor ..end.."
+    enc = Encryptor.new(message, "12345", "151215")
+    encrypted_message = enc.encrypt
+    dec = Decryptor.new(encrypted_message, "54321", "151515")
+    plaintext = dec.decrypt
+    refute_equal message, plaintext
   end
-
-  def test_date_code_outputs_last_4_numbers_of_sqaured_total
-
-  end
-
-  def test_process_date_is_sqaured
-    date = Time.now.strftime("%d%m%y") ** 2
-    assert
-  end
-
-  def test_decrypt_converts_encrypted_message
-
-  end
-
-
-end
-
 
 end
