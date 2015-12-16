@@ -1,4 +1,4 @@
-test_helper
+
 require 'pry'
 
 
@@ -41,25 +41,16 @@ class Crack
    d_position = @char_set.index('d')
    n_position = @char_set.index('n')
 
-   #positions in the charset of encrypted characters
-=begin
-   encrypted_last_character = @message.length - 1
-   encrypted_second_to_last_character = @message.length - 2
-   encrypted_third_to_last_character = @message.length - 3
-   encrypted_fourth_to_last_character = @message.length - 4
-=end
    encrypted_last_character = @char_set.index(@message[-1])
    encrypted_second_to_last_character = @char_set.index(@message[-2])
    encrypted_third_to_last_character = @char_set.index(@message[-3])
    encrypted_fourth_to_last_character = @char_set.index(@message[-4])
-
 
    rotation_array[last_dot_rotation_index] = (encrypted_last_character - dot_position -last_dot_offset) % @char_set.length
    rotation_array[second_to_last_dot_rotation_index] =  (encrypted_second_to_last_character - dot_position - second_to_last_dot_offset) % @char_set.length
    rotation_array[d_rotation_index] = (encrypted_third_to_last_character - d_position - d_rotation_offset) % @char_set.length
    rotation_array[n_rotation_index] = (encrypted_fourth_to_last_character - n_position - n_rotation_offset) % @char_set.length
    puts "rotation_array = " + rotation_array.inspect
-
 
   increment = @char_set.length
   a_rot = generate_increments(rotation_array[0], increment).map { |val| "%02d" % val.to_s }

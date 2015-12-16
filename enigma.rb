@@ -1,3 +1,5 @@
+require_relative 'keygen'
+require_relative 'dategen'
 require_relative 'constants'
 require_relative 'encryptor'
 require_relative 'decryptor'
@@ -15,44 +17,36 @@ class Enigma
     end
 
     def encrypt(message, key =nil, date = nil)
-      if key.nil?
-        encrypt_key = create_new_key
-      else
-        encrypt_key = key
-      end
-      if date.nil?
-        date_key = Time.now.strftime("%d%m%y")
-      else
-        date_key = date
-      end
-      encryptor = Encryptor.new(message,encrypt_key,date_key)
+      kg = Keygen.new(key)  #kg.key will contain the secret key
+      dg = Dategen.new(date)  #dg.key will contain the date key
+      #encryptor = Encryptor.new(message,encrypt_key,date_key)
+      encryptor = Encryptor.new(message,kg.key,dg.key)
       encryptor.encrypt
     end
 
     def decrypt(encrypted_message, key, date)
-      decryptor = Decryptor.new(encrypted_message,key,date)
+      kg = Keygen.new(key)
+      dg = Dategen.new(date)
+      #decryptor = Decryptor.new(encrypted_message,key,date)
+      decryptor = Decryptor.new(encrypted_message,kg.key,dg.key)
       decryptor.decrypt
     end
 
     def crack(encrypted_message, date = nil)
-      if date.nil?
-        date_key = Time.now.strftime("%d%m%y")
-      else
-        date_key = date
-      end
-      crackle = Crack.new(encrypted_message,date_key)
-      crackle.crackle
-    end
 
-    def create_new_key
-       "%05d" % Random.new.rand(99999)
+      dg = Dategen.new(date)  #dg.key will contain the date key
+
+      #crackle = Crack.new(encrypted_message,date_key)
+      crackle = Crack.new(encrypted_message,dg.key)
+
+      crackle.crackle
     end
 
 end
 
 e = Enigma.new
 my_message = "jace4life ..end.."
-=begin
+
 key = "12345"
 puts "key = " + key
 
@@ -67,7 +61,8 @@ puts "decrypt_plaintext = " + decrypt_plaintext.to_s
 puts "Calling crack"
 crack_plaintext = e.crack(encrypted_message)
 puts "crack_plaintext = " + crack_plaintext.to_s
-=end
+
+=begin
 puts "-" * 10
 puts "Calling encrypt (no key)"
 encrypted_message = e.encrypt(my_message)
@@ -76,3 +71,4 @@ puts "-" * 10
 puts "Calling crack"
 crack_plaintext = e.crack(encrypted_message)
 #puts "crack_plaintext = " + crack_plaintext.to_s
+=end
