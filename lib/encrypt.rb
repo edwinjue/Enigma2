@@ -1,5 +1,7 @@
 require_relative 'encryptor'
 require_relative 'keygen'
+require_relative 'dategen'
+require_relative 'constants'
 require 'pry'
 
 unless ARGV.length == 2
