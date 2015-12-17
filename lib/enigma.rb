@@ -32,6 +32,7 @@ class Enigma
 
 end
 
+=begin
 e = Enigma.new
 my_message = "jace4life ..end.."
 

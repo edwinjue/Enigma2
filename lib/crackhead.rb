@@ -14,7 +14,7 @@ class Crack
     @char_set = Constants::CHARSET.split(//)
     @num_digits = Constants::CHARSET.split(//).length.to_s.length
     @offset_array = process_date(@date)
-    puts "@offset_array = " + @offset_array.inspect
+    # puts "@offset_array = " + @offset_array.inspect
   end
 
   # def crackle

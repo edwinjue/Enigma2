@@ -18,7 +18,7 @@ class Encryptor
     #to determine the number of digits we are working with for each character
   	#for example: when length of charset reaches 100, we need to make sure '5'
     # gets padded like '005'
-    @rotation_array = key_rotation(@key)
+    @rotation_array = key_rotation(@key.to_s)
     @offset_array = process_date(@date)
     @total_offset = [@offset_array,@rotation_array].transpose.map{|arr|
       arr.map!{ |x| x.to_i }

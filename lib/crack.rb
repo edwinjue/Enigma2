@@ -14,7 +14,7 @@ class Crack
     @char_set = Constants::CHARSET.split(//)
     @num_digits = Constants::CHARSET.split(//).length.to_s.length
     @offset_array = process_date(@date)
-    puts "@offset_array = " + @offset_array.inspect
+    # puts "@offset_array = " + @offset_array.inspect
   end
 
   def crackle
@@ -51,17 +51,17 @@ class Crack
    rotation_array[second_to_last_dot_rotation_index] =  (encrypted_second_to_last_character - dot_position - second_to_last_dot_offset) % @char_set.length
    rotation_array[d_rotation_index] = (encrypted_third_to_last_character - d_position - d_rotation_offset) % @char_set.length
    rotation_array[n_rotation_index] = (encrypted_fourth_to_last_character - n_position - n_rotation_offset) % @char_set.length
-   puts "rotation_array = " + rotation_array.inspect
+  #  puts "rotation_array = " + rotation_array.inspect
 
   increment = @char_set.length
   a_rot = generate_increments(rotation_array[0], increment).map { |val| "%02d" % val.to_s }
-  puts "a_rot = " + a_rot.inspect
+  # puts "a_rot = " + a_rot.inspect
   b_rot = generate_increments(rotation_array[1], increment).map { |val| "%02d" % val.to_s }
-  puts "b_rot = " + b_rot.inspect
+  # puts "b_rot = " + b_rot.inspect
   c_rot = generate_increments(rotation_array[2], increment).map { |val| "%02d" % val.to_s }
-  puts "c_rot = " + c_rot.inspect
+  # puts "c_rot = " + c_rot.inspect
   d_rot = generate_increments(rotation_array[3], increment).map { |val| "%02d" % val.to_s }
-  puts "d_rot = " + d_rot.inspect
+  # puts "d_rot = " + d_rot.inspect
 
   crack(rotation_array)
 

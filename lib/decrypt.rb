@@ -17,7 +17,7 @@ end
 def decrypt_file(file_name,data,key,date)
 	puts "inside decrypt_file: data = #{data}"
 	decryptor = Decryptor.new(data,key,date)
-	plaintext = decryptor.run
+	plaintext = decryptor.decrypt
 	File.write(file_name, plaintext)
 	puts "Created #{file_name} with the key #{decryptor.key} and date #{decryptor.date}"
 end

@@ -5,6 +5,8 @@ require 'pry'
 
 class Decryptor
 
+  attr_reader :key, :date
+
   def initialize(message, key, date)
     if message.nil?
       raise ArgumentError, "Invalid message, message was nil"

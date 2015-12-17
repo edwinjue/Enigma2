@@ -1,10 +1,10 @@
 class Keygen
 	attr_reader :key
-	def initialize(input)
+	def initialize(input = nil)
     if input.nil?
       @key = create_new_key
     else
-      @key = input
+    	@key = "%05d" % input
     end
 	end
 

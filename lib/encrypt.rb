@@ -22,7 +22,7 @@ def encrypt_file(file_name,data)
 	puts "inside encrypte_file: data = #{data}"
 	key = Keygen.new.create_new_key
 	encryptor = Encryptor.new(data,key,Time.now)
-	encryptext = encryptor.run
+	encryptext = encryptor.encrypt
 	File.write(file_name, encryptext)
 	puts "Created #{file_name} with the key #{encryptor.key} and date #{encryptor.date}"
 end
