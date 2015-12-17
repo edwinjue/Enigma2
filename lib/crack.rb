@@ -4,7 +4,7 @@ require 'pry'
 
 class Crack
 
-  def initialize(message, date)
+  def initialize(message, date = nil)
     if message.nil?
       raise ArgumentError, "Invalid message, message was nil"
     end

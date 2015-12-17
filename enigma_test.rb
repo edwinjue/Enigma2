@@ -42,4 +42,17 @@ class EnigmaTest < Minitest::Test
     assert_equal message, crack.crackle
   end
 
+  def test_it_cracks_without_a_date
+    message = "Your my Favorite Instructor ..end.."
+    enc     = Encryptor.new(message, "12345")
+    crack   = Crack.new(enc.encrypt)
+    assert_equal message, crack.crackle
+  end
+
+  def test_date_generates_6_digit_number
+    enc = Encryptor.new('my message')
+    date = enc.date
+    assert 6, date.length
+  end
+
 end
