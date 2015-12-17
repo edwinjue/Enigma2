@@ -1,7 +1,7 @@
 require_relative 'constants'
 require_relative 'encryptor'
 require_relative 'decryptor'
-require_relative 'crack'
+require_relative 'cracker'
 require 'pry'
 require 'date'
 
@@ -32,7 +32,7 @@ class Enigma
 
 end
 
-=begin
+
 e = Enigma.new
 my_message = "jace4life ..end.."
 
@@ -40,7 +40,7 @@ key = "12345"
 puts "key = " + key
 
 puts "Calling encrypt w/ key"
-encrypted_message = e.encrypt(my_message)
+encrypted_message = e.encrypt(my_message,key)
 puts "encrypted_message = " + encrypted_message.to_s
 
 puts "Calling decrypt"
